@@ -1,0 +1,966 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: sql307.byetcluster.com
+-- Generation Time: 22 فبراير 2026 الساعة 15:21
+-- إصدار الخادم: 11.4.10-MariaDB
+-- PHP Version: 7.2.22
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `if0_40592393_sultana_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(20) DEFAULT 'admin'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `admins`
+--
+
+INSERT INTO `admins` (`id`, `username`, `password`, `role`) VALUES
+(8, 'admin', '123456', 'admin');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `blocked_users`
+--
+
+CREATE TABLE `blocked_users` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `blocked_user_id` int(11) NOT NULL,
+  `reason` varchar(255) DEFAULT NULL,
+  `blocked_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `cities`
+--
+
+CREATE TABLE `cities` (
+  `id` int(11) NOT NULL,
+  `region_id` int(11) NOT NULL,
+  `name_ar` varchar(150) NOT NULL,
+  `name_en` varchar(150) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `cities`
+--
+
+INSERT INTO `cities` (`id`, `region_id`, `name_ar`, `name_en`, `created_at`) VALUES
+(7, 14, 'الرياض', 'Riyadh', '2026-02-19 03:37:26'),
+(8, 14, 'الخرج', 'Al Kharj', '2026-02-19 03:37:26'),
+(9, 14, 'الدوادمي', 'Al Dawadmi', '2026-02-19 03:37:26'),
+(10, 14, 'المجمعة', 'Al Majmaah', '2026-02-19 03:37:26'),
+(11, 14, 'القويعية', 'Al Quwayiyah', '2026-02-19 03:37:26'),
+(12, 14, 'وادي الدواسر', 'Wadi Al Dawasir', '2026-02-19 03:37:26'),
+(13, 14, 'شقراء', 'Shaqra', '2026-02-19 03:37:26'),
+(14, 14, 'عفيف', 'Afif', '2026-02-19 03:37:26'),
+(15, 14, 'الزلفي', 'Al Zulfi', '2026-02-19 03:37:26'),
+(16, 15, 'مكة المكرمة', 'Makkah', '2026-02-19 03:45:10'),
+(17, 15, 'جدة', 'Jeddah', '2026-02-19 03:45:10'),
+(18, 15, 'الطائف', 'Taif', '2026-02-19 03:45:10'),
+(19, 15, 'رابغ', 'Rabigh', '2026-02-19 03:45:10'),
+(20, 15, 'القنفذة', 'Al Qunfudhah', '2026-02-19 03:45:10'),
+(21, 15, 'الليث', 'Al Lith', '2026-02-19 03:45:10'),
+(22, 15, 'خليص', 'Khulais', '2026-02-19 03:45:10'),
+(23, 15, 'الجموم', 'Al Jumum', '2026-02-19 03:45:10'),
+(33, 14, 'الغاط', 'Al Ghat', '2026-02-19 03:46:58'),
+(34, 14, 'رماح', 'Rumah', '2026-02-19 03:46:58'),
+(35, 14, 'ثادق', 'Thadiq', '2026-02-19 03:46:58'),
+(36, 14, 'ضرما', 'Dharma', '2026-02-19 03:46:58'),
+(37, 14, 'حوطة بني تميم', 'Hawtat Bani Tamim', '2026-02-19 03:46:58'),
+(38, 14, 'السليل', 'As Sulayyil', '2026-02-19 03:46:58'),
+(39, 16, 'المدينة المنورة', 'Madinah', '2026-02-19 03:47:37'),
+(40, 16, 'ينبع', 'Yanbu', '2026-02-19 03:47:37'),
+(41, 16, 'العلا', 'Al Ula', '2026-02-19 03:47:37'),
+(42, 16, 'بدر', 'Badr', '2026-02-19 03:47:37'),
+(43, 16, 'خيبر', 'Khaybar', '2026-02-19 03:47:37'),
+(44, 16, 'الحناكية', 'Al Hanakiyah', '2026-02-19 03:47:37'),
+(45, 16, 'المهد', 'Al Mahd', '2026-02-19 03:47:37'),
+(46, 17, 'الدمام', 'Dammam', '2026-02-19 03:48:01'),
+(47, 17, 'الخبر', 'Khobar', '2026-02-19 03:48:01'),
+(48, 17, 'الظهران', 'Dhahran', '2026-02-19 03:48:01'),
+(49, 17, 'الأحساء', 'Al Ahsa', '2026-02-19 03:48:01'),
+(50, 17, 'القطيف', 'Qatif', '2026-02-19 03:48:01'),
+(51, 17, 'الجبيل', 'Jubail', '2026-02-19 03:48:01'),
+(52, 17, 'حفر الباطن', 'Hafar Al Batin', '2026-02-19 03:48:01'),
+(53, 17, 'رأس تنورة', 'Ras Tanura', '2026-02-19 03:48:01'),
+(54, 17, 'الخفجي', 'Al Khafji', '2026-02-19 03:48:01'),
+(55, 17, 'النعيرية', 'Al Nairyah', '2026-02-19 03:48:01'),
+(56, 17, 'بقيق', 'Abqaiq', '2026-02-19 03:48:01'),
+(57, 18, 'بريدة', 'Buraydah', '2026-02-19 03:49:54'),
+(58, 18, 'عنيزة', 'Unaizah', '2026-02-19 03:49:54'),
+(59, 18, 'الرس', 'Ar Rass', '2026-02-19 03:49:54'),
+(60, 18, 'المذنب', 'Al Mithnab', '2026-02-19 03:49:54'),
+(61, 18, 'البكيرية', 'Al Bukayriyah', '2026-02-19 03:49:54'),
+(62, 18, 'البدائع', 'Al Badai', '2026-02-19 03:49:54'),
+(63, 18, 'رياض الخبراء', 'Riyadh Al Khabra', '2026-02-19 03:49:54'),
+(64, 23, 'أبها', 'Abha', '2026-02-19 03:50:39'),
+(65, 23, 'خميس مشيط', 'Khamis Mushait', '2026-02-19 03:50:39'),
+(66, 23, 'بيشة', 'Bisha', '2026-02-19 03:50:39'),
+(67, 23, 'النماص', 'Al Namas', '2026-02-19 03:50:39'),
+(68, 23, 'محايل عسير', 'Muhayil', '2026-02-19 03:50:39'),
+(69, 23, 'رجال ألمع', 'Rijal Almaa', '2026-02-19 03:50:39'),
+(70, 24, 'جازان', 'Jazan', '2026-02-19 03:51:07'),
+(71, 24, 'صبيا', 'Sabya', '2026-02-19 03:51:07'),
+(72, 24, 'أبو عريش', 'Abu Arish', '2026-02-19 03:51:07'),
+(73, 24, 'صامطة', 'Samtah', '2026-02-19 03:51:07'),
+(74, 24, 'الدرب', 'Ad Darb', '2026-02-19 03:51:07'),
+(75, 25, 'نجران', 'Najran', '2026-02-19 03:51:35'),
+(76, 25, 'شرورة', 'Sharurah', '2026-02-19 03:51:35'),
+(77, 25, 'حبونا', 'Hubuna', '2026-02-19 03:51:35'),
+(78, 25, 'يدمة', 'Yadamah', '2026-02-19 03:51:35'),
+(79, 26, 'الباحة', 'Al Baha', '2026-02-19 03:52:12'),
+(80, 26, 'بلجرشي', 'Baljurashi', '2026-02-19 03:52:12'),
+(81, 26, 'المندق', 'Al Mandaq', '2026-02-19 03:52:12'),
+(82, 26, 'العقيق', 'Al Aqiq', '2026-02-19 03:52:12'),
+(83, 19, 'حائل', 'Hail', '2026-02-19 03:53:30'),
+(84, 19, 'بقعاء', 'Baqa', '2026-02-19 03:53:30'),
+(85, 19, 'الغزالة', 'Al Ghazalah', '2026-02-19 03:53:30'),
+(86, 19, 'الشنان', 'Ash Shanan', '2026-02-19 03:53:30'),
+(87, 20, 'تبوك', 'Tabuk', '2026-02-19 03:55:17'),
+(88, 20, 'الوجه', 'Al Wajh', '2026-02-19 03:55:17'),
+(89, 20, 'ضباء', 'Duba', '2026-02-19 03:55:17'),
+(90, 20, 'تيماء', 'Tayma', '2026-02-19 03:55:17'),
+(91, 20, 'أملج', 'Umluj', '2026-02-19 03:55:17'),
+(92, 21, 'سكاكا', 'Sakaka', '2026-02-19 03:55:53'),
+(93, 21, 'القريات', 'Qurayyat', '2026-02-19 03:55:53'),
+(94, 21, 'دومة الجندل', 'Dumat Al Jandal', '2026-02-19 03:55:53'),
+(95, 22, 'عرعر', 'Arar', '2026-02-19 03:57:02'),
+(96, 22, 'رفحاء', 'Rafha', '2026-02-19 03:57:02'),
+(97, 22, 'طريف', 'Turaif', '2026-02-19 03:57:02');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `client_wallet`
+--
+
+CREATE TABLE `client_wallet` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `type` enum('payment','refund') DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `conversations`
+--
+
+CREATE TABLE `conversations` (
+  `id` int(11) NOT NULL,
+  `user_id_1` int(11) NOT NULL,
+  `user_id_2` int(11) NOT NULL,
+  `least_id` int(11) GENERATED ALWAYS AS (least(`user_id_1`,`user_id_2`)) VIRTUAL,
+  `greatest_id` int(11) GENERATED ALWAYS AS (greatest(`user_id_1`,`user_id_2`)) VIRTUAL,
+  `subject` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `last_message_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `is_active` tinyint(1) DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `countries`
+--
+
+CREATE TABLE `countries` (
+  `id` int(11) NOT NULL,
+  `name_ar` varchar(100) NOT NULL,
+  `name_en` varchar(100) NOT NULL,
+  `code` varchar(5) NOT NULL,
+  `currency` varchar(10) NOT NULL,
+  `currency_symbol` varchar(10) NOT NULL,
+  `is_active` tinyint(1) DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `phone_code` varchar(10) NOT NULL DEFAULT '',
+  `flag` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `countries`
+--
+
+INSERT INTO `countries` (`id`, `name_ar`, `name_en`, `code`, `currency`, `currency_symbol`, `is_active`, `created_at`, `phone_code`, `flag`) VALUES
+(1, 'السعودية', 'Saudi Arabia', 'SA', 'SAR', 'ر.س', 1, '2026-02-19 03:28:55', '+966', '🇸🇦'),
+(2, 'البحرين', 'Bahrain', 'BH', 'BHD', 'د.ب', 1, '2026-02-19 03:28:55', '+973', '🇧🇭'),
+(3, 'قطر', 'Qatar', 'QA', 'QAR', 'ر.ق', 1, '2026-02-19 03:28:55', '+974', '🇶🇦'),
+(4, 'الكويت', 'Kuwait', 'KW', 'KWD', 'د.ك', 1, '2026-02-19 03:28:55', '+965', '🇰🇼'),
+(7, 'الإمارات', '', '', '', '', 1, '2026-02-19 05:16:10', '+971', '🇦🇪'),
+(10, 'عمان', '', '', '', '', 1, '2026-02-19 05:16:10', '+968', '🇴🇲');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `login_attempts`
+--
+
+CREATE TABLE `login_attempts` (
+  `id` int(11) NOT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `attempt_time` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `phone`, `attempt_time`) VALUES
+(4, '130.164.133.174', '0565270665', '2026-02-21 15:09:04'),
+(5, '130.164.133.174', '0565270665', '2026-02-21 15:09:14'),
+(6, '130.164.133.174', '0565270665', '2026-02-21 15:09:33');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `messages`
+--
+
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL,
+  `conversation_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `message_text` text NOT NULL,
+  `attachment_url` varchar(500) DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `read_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `message_notifications`
+--
+
+CREATE TABLE `message_notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `conversation_id` int(11) NOT NULL,
+  `unread_count` int(11) DEFAULT 1,
+  `last_checked_at` timestamp NULL DEFAULT current_timestamp(),
+  `last_notified_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `service_type` varchar(100) NOT NULL,
+  `provider_type` enum('tailor','designer','packager') NOT NULL,
+  `details` text DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT 0.00,
+  `status` enum('pending','in_progress','completed','cancelled') DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `order_number` varchar(50) DEFAULT NULL,
+  `payment_status` enum('unpaid','paid','released','refunded') DEFAULT 'unpaid',
+  `commission_amount` decimal(10,2) DEFAULT 0.00,
+  `provider_earning` decimal(10,2) DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `orders`
+--
+
+INSERT INTO `orders` (`id`, `client_id`, `provider_id`, `service_type`, `provider_type`, `details`, `price`, `status`, `created_at`, `order_number`, `payment_status`, `commission_amount`, `provider_earning`) VALUES
+(1, 1, 1, 'تفصيل ثوب سعودي فاخر', 'tailor', NULL, '150.00', 'pending', '2026-02-17 07:03:56', NULL, 'unpaid', '0.00', '0.00'),
+(2, 1, 1, 'تضييق فستان سهرة', 'tailor', NULL, '80.00', 'completed', '2026-02-17 07:03:56', NULL, 'unpaid', '0.00', '0.00'),
+(3, 1, 1, 'خياطة طقم أطفال', 'tailor', NULL, '200.00', 'in_progress', '2026-02-17 07:03:56', NULL, 'unpaid', '0.00', '0.00'),
+(4, 1, 1, 'تقصير بنطلون', 'tailor', NULL, '30.00', 'cancelled', '2026-02-17 07:03:56', NULL, 'unpaid', '0.00', '0.00'),
+(5, 1, 1, 'تطريز 50 تيشيرت', 'tailor', NULL, '1500.00', 'completed', '2026-02-17 07:10:50', NULL, 'unpaid', '0.00', '0.00'),
+(6, 1, 1, 'تفصيل بدلة رسمية', 'tailor', NULL, '600.00', 'completed', '2026-02-17 07:10:50', NULL, 'unpaid', '0.00', '0.00'),
+(7, 1, 1, 'تفصيل ثوب تجريبي', 'tailor', NULL, '150.00', 'pending', '2026-02-17 07:19:04', NULL, 'unpaid', '0.00', '0.00');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `commission_amount` decimal(10,2) DEFAULT 0.00,
+  `provider_amount` decimal(10,2) DEFAULT 0.00,
+  `status` enum('pending','held','released','refunded') DEFAULT 'pending',
+  `payment_method` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `currency` varchar(10) DEFAULT 'SAR',
+  `transaction_id` varchar(150) DEFAULT NULL,
+  `admin_received` tinyint(1) DEFAULT 0,
+  `released_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `portfolio`
+--
+
+CREATE TABLE `portfolio` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `old_price` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `image` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `category` varchar(255) NOT NULL DEFAULT 'عام'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `old_price`, `image`, `created_at`, `category`) VALUES
+(2, 'نجد', '14444', '500.00', '1500.00', '6999fdc1322e0.jpg', '2026-02-21 18:47:29', 'fabrics');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `provider_profiles`
+--
+
+CREATE TABLE `provider_profiles` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `provider_type` enum('tailor','designer','packager') NOT NULL DEFAULT 'tailor',
+  `country_id` int(11) DEFAULT NULL,
+  `region_id` int(11) DEFAULT NULL,
+  `area` varchar(100) DEFAULT NULL,
+  `provider_name` varchar(100) DEFAULT NULL,
+  `specialty` varchar(255) DEFAULT NULL,
+  `starting_price` decimal(10,2) DEFAULT 0.00,
+  `delivery_time` varchar(50) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `provider_image` varchar(255) DEFAULT NULL,
+  `work_image` varchar(255) DEFAULT NULL,
+  `bio` mediumtext DEFAULT NULL,
+  `rating` decimal(3,2) DEFAULT 0.00,
+  `total_orders` int(11) DEFAULT 0,
+  `verified` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `city_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `provider_profiles`
+--
+
+INSERT INTO `provider_profiles` (`id`, `user_id`, `provider_type`, `country_id`, `region_id`, `area`, `provider_name`, `specialty`, `starting_price`, `delivery_time`, `location`, `provider_image`, `work_image`, `bio`, `rating`, `total_orders`, `verified`, `created_at`, `city_id`) VALUES
+(1, 2, 'tailor', 1, 19, NULL, 'حسني خياط', 'عبايات', '150.00', '', 'حي الشنان', 'default_provider.png', 'default_work.png', NULL, '0.00', 0, 0, '2026-02-20 22:05:02', 86),
+(2, 3, 'designer', NULL, NULL, NULL, 'تطريز', 'تطريز يدوي', '250.00', 'حسب الطلب', 'جده', 'avatar_6998dac018811.jpg', 'art_6998dac0188cb.jpg', NULL, '0.00', 0, 0, '2026-02-20 22:05:52', NULL),
+(3, 4, '', NULL, NULL, NULL, 'تغليف احترافي', '', '350.00', 'حسب الطلب', 'الطاىف ', '1771625211_3877_1000050654.jpg', '1771625211_6237_1000050644.jpg', NULL, '0.00', 0, 0, '2026-02-20 22:06:51', NULL),
+(4, 5, 'tailor', 1, 21, NULL, 'وروؤو', 'عبايات', '50.00', '', 'يهني', 'default_provider.png', 'default_work.png', NULL, '0.00', 0, 0, '2026-02-21 17:35:57', 93),
+(5, 7, 'designer', NULL, NULL, NULL, 'ببىر', 'تصميم عبايات', '100.00', 'حسب الطلب', 'حي الخبر ', 'avatar_6999fd68ced20.jpg', 'art_6999fd68cedb7.jpg', NULL, '0.00', 0, 0, '2026-02-21 18:46:00', NULL),
+(6, 8, 'designer', NULL, NULL, NULL, 'كرّه', 'تطريز يدوي', '100.00', 'حسب الطلب', 'الخبر', 'avatar_699a3904226d6.png', 'art_699a3904227ec.png', NULL, '0.00', 0, 0, '2026-02-21 23:00:20', NULL),
+(7, 9, 'tailor', 1, 19, NULL, 'محمود ', 'عبايات', '280.00', '', 'تيماء', 'default_provider.png', 'default_work.png', NULL, '0.00', 0, 0, '2026-02-22 17:57:34', 86),
+(8, 11, 'tailor', 1, 16, NULL, 'عمر المالك', 'عبايات', '900.00', '', 'شارع خيبر', 'default_provider.png', 'default_work.png', NULL, '0.00', 0, 0, '2026-02-22 18:48:09', 43);
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `regions`
+--
+
+CREATE TABLE `regions` (
+  `id` int(11) NOT NULL,
+  `country_id` int(11) NOT NULL,
+  `name_ar` varchar(100) NOT NULL,
+  `name_en` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `regions`
+--
+
+INSERT INTO `regions` (`id`, `country_id`, `name_ar`, `name_en`, `created_at`) VALUES
+(14, 1, 'الرياض', 'Riyadh', '2026-02-19 03:31:18'),
+(15, 1, 'مكة المكرمة', 'Makkah', '2026-02-19 03:31:18'),
+(16, 1, 'المدينة المنورة', 'Madinah', '2026-02-19 03:31:18'),
+(17, 1, 'المنطقة الشرقية', 'Eastern Province', '2026-02-19 03:31:18'),
+(18, 1, 'القصيم', 'Al Qassim', '2026-02-19 03:31:18'),
+(19, 1, 'حائل', 'Hail', '2026-02-19 03:31:18'),
+(20, 1, 'تبوك', 'Tabuk', '2026-02-19 03:31:18'),
+(21, 1, 'الجوف', 'Al Jouf', '2026-02-19 03:31:18'),
+(22, 1, 'الحدود الشمالية', 'Northern Borders', '2026-02-19 03:31:18'),
+(23, 1, 'عسير', 'Asir', '2026-02-19 03:31:18'),
+(24, 1, 'جازان', 'Jazan', '2026-02-19 03:31:18'),
+(25, 1, 'نجران', 'Najran', '2026-02-19 03:31:18'),
+(26, 1, 'الباحة', 'Al Bahah', '2026-02-19 03:31:18');
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `services`
+--
+
+CREATE TABLE `services` (
+  `id` int(11) NOT NULL,
+  `provider_id` int(11) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `description` text DEFAULT NULL,
+  `base_price` decimal(10,2) DEFAULT 0.00,
+  `category` enum('tailoring','design','packaging') NOT NULL,
+  `status` enum('active','disabled') DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `role` enum('client','tailor','designer','packaging') NOT NULL DEFAULT 'client',
+  `status` varchar(20) DEFAULT 'pending',
+  `provider_name` varchar(100) DEFAULT NULL,
+  `provider_image` varchar(255) DEFAULT NULL,
+  `work_image` varchar(255) DEFAULT NULL,
+  `starting_price` decimal(10,2) DEFAULT 0.00,
+  `specialty` varchar(255) DEFAULT NULL,
+  `delivery_time` varchar(50) DEFAULT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `phone`, `created_at`, `role`, `status`, `provider_name`, `provider_image`, `work_image`, `starting_price`, `specialty`, `delivery_time`, `location`, `last_login`) VALUES
+(1, 'ناصر عميل', '$2y$10$f3wgoOZsVisk5RO9A8PNJuyQXMMt.D2gdPCn.cWNDEPmyb6phwcZC', '01005027476', '2026-02-20 22:04:03', 'client', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, '2026-02-22 07:23:46'),
+(2, 'حسني خياط', '$2y$10$/dAw2dVTdYDPkf64b9XbYOm93dAtfIk3wuENwgimGrLLP8vEoHyNq', '01063387928', '2026-02-20 22:05:02', 'tailor', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL),
+(3, 'شيماء مغلفه', '$2y$10$fj.4yrQxhA5YajULOOCx/.s4hunYoQk5UPg4yyIQJWsldhvumKP7m', '01013628610', '2026-02-20 22:05:52', 'designer', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, '2026-02-21 18:07:24'),
+(4, 'احمد ', '$2y$10$8ybQFcU7ecKr1XWOBl9/t.eFF/pbTVKUWskLjQwqMk1yq0NQkvSPm', '01128074727', '2026-02-20 22:06:51', 'packaging', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, '2026-02-21 18:06:46'),
+(5, 'طارق مم', '$2y$10$A68kRSBvw6j1qcbzxw8hueF/RGNYjev/krUdh6PTs0bH69zPRGfXO', '01000767979', '2026-02-21 17:35:57', 'tailor', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL),
+(7, 'حنان محمد', '$2y$10$ZJQlhM6GE5VZzTmIE2xYJOoniTsCvASDyvCqViU5BtCm9Zfp/nbt2', '01012345678', '2026-02-21 18:46:00', 'designer', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL),
+(8, 'نوره محمد', '$2y$10$hV/BfU6VDmjqs5j4XEXihuuJhuarntU9VKU/3ktExzuK3TrvrplOq', '565270665', '2026-02-21 23:00:20', 'designer', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL),
+(9, 'طه محمود', '$2y$10$zYQnXHvOD/fYyj3R.WUhgekfb.tcHzxPPVB8Vrt2iTJgWjAUEq/Je', '01212345678', '2026-02-22 17:57:34', 'tailor', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL),
+(10, 'مظهر', '$2y$10$QTvOHUyCGLAUUAyT.Pny4O/OSKJ0YbgIL3mBv9TIQtfIJEA74ZyQ6', '015678910', '2026-02-22 18:37:47', 'client', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL),
+(11, 'عمر', '$2y$10$wvxqIqeGWdtxfFZzyhSMFexw9DQeune/MJEOyg4yiBNF9jIMTNxei', '01002003004', '2026-02-22 18:48:09', 'tailor', 'approved', NULL, NULL, NULL, '0.00', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `user_addresses`
+--
+
+CREATE TABLE `user_addresses` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `area` varchar(100) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `notes` mediumtext DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `violations`
+--
+
+CREATE TABLE `violations` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `reason` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- بنية الجدول `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- إرجاع أو استيراد بيانات الجدول `wishlist`
+--
+
+INSERT INTO `wishlist` (`id`, `user_id`, `product_id`, `created_at`) VALUES
+(2, 23, 1, '2026-02-18 23:52:01');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blocked_users`
+--
+ALTER TABLE `blocked_users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_block` (`user_id`,`blocked_user_id`),
+  ADD KEY `idx_user` (`user_id`),
+  ADD KEY `idx_blocked` (`blocked_user_id`);
+
+--
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name_ar` (`name_ar`,`region_id`),
+  ADD KEY `idx_region` (`region_id`);
+
+--
+-- Indexes for table `client_wallet`
+--
+ALTER TABLE `client_wallet`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `conversations`
+--
+ALTER TABLE `conversations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_conversation` (`least_id`,`greatest_id`),
+  ADD KEY `idx_user_1` (`user_id_1`),
+  ADD KEY `idx_user_2` (`user_id_2`),
+  ADD KEY `idx_last_message` (`last_message_at`),
+  ADD KEY `idx_active` (`is_active`);
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_ip_time` (`ip_address`,`attempt_time`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_conversation` (`conversation_id`),
+  ADD KEY `idx_sender` (`sender_id`),
+  ADD KEY `idx_receiver` (`receiver_id`),
+  ADD KEY `idx_is_read` (`is_read`),
+  ADD KEY `idx_created` (`created_at`),
+  ADD KEY `idx_conversation_created` (`conversation_id`,`created_at`);
+
+--
+-- Indexes for table `message_notifications`
+--
+ALTER TABLE `message_notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_notification` (`user_id`,`conversation_id`),
+  ADD KEY `idx_user` (`user_id`),
+  ADD KEY `idx_conversation` (`conversation_id`),
+  ADD KEY `idx_unread` (`unread_count`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `order_number` (`order_number`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `provider_id` (`provider_id`);
+
+--
+-- Indexes for table `portfolio`
+--
+ALTER TABLE `portfolio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `provider_profiles`
+--
+ALTER TABLE `provider_profiles`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`),
+  ADD KEY `fk_provider_country` (`country_id`),
+  ADD KEY `fk_provider_region` (`region_id`),
+  ADD KEY `fk_provider_city` (`city_id`);
+
+--
+-- Indexes for table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `provider_id` (`provider_id`);
+
+--
+-- Indexes for table `regions`
+--
+ALTER TABLE `regions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `country_id` (`country_id`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `provider_id` (`provider_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `phone` (`phone`),
+  ADD KEY `idx_phone` (`phone`);
+
+--
+-- Indexes for table `user_addresses`
+--
+ALTER TABLE `user_addresses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_address_user` (`user_id`);
+
+--
+-- Indexes for table `violations`
+--
+ALTER TABLE `violations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `blocked_users`
+--
+ALTER TABLE `blocked_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+
+--
+-- AUTO_INCREMENT for table `client_wallet`
+--
+ALTER TABLE `client_wallet`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `conversations`
+--
+ALTER TABLE `conversations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `message_notifications`
+--
+ALTER TABLE `message_notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `portfolio`
+--
+ALTER TABLE `portfolio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `provider_profiles`
+--
+ALTER TABLE `provider_profiles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `regions`
+--
+ALTER TABLE `regions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `user_addresses`
+--
+ALTER TABLE `user_addresses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `violations`
+--
+ALTER TABLE `violations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- قيود الجداول المحفوظة
+--
+
+--
+-- القيود للجدول `blocked_users`
+--
+ALTER TABLE `blocked_users`
+  ADD CONSTRAINT `blocked_users_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `blocked_users_ibfk_2` FOREIGN KEY (`blocked_user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- القيود للجدول `cities`
+--
+ALTER TABLE `cities`
+  ADD CONSTRAINT `cities_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `regions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_region` FOREIGN KEY (`region_id`) REFERENCES `regions` (`id`) ON DELETE CASCADE;
+
+--
+-- القيود للجدول `conversations`
+--
+ALTER TABLE `conversations`
+  ADD CONSTRAINT `conversations_ibfk_1` FOREIGN KEY (`user_id_1`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `conversations_ibfk_2` FOREIGN KEY (`user_id_2`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- القيود للجدول `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `messages_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `messages_ibfk_3` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- القيود للجدول `message_notifications`
+--
+ALTER TABLE `message_notifications`
+  ADD CONSTRAINT `message_notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `message_notifications_ibfk_2` FOREIGN KEY (`conversation_id`) REFERENCES `conversations` (`id`) ON DELETE CASCADE;
+
+--
+-- القيود للجدول `portfolio`
+--
+ALTER TABLE `portfolio`
+  ADD CONSTRAINT `portfolio_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- القيود للجدول `provider_profiles`
+--
+ALTER TABLE `provider_profiles`
+  ADD CONSTRAINT `fk_provider_city` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_provider_country` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_provider_region` FOREIGN KEY (`region_id`) REFERENCES `regions` (`id`) ON DELETE SET NULL;
+
+--
+-- القيود للجدول `regions`
+--
+ALTER TABLE `regions`
+  ADD CONSTRAINT `regions_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
